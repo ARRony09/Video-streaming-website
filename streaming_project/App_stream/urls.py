@@ -1,10 +1,10 @@
 from django.urls import path,include
 from . import views
-from .views import VideoDetailView, VideoListView
+from .views import VideoListView
 
 app_name='App_stream'
 
 urlpatterns = [
     path('',VideoListView.as_view(),name='home'),
-    path('details/<pk>',VideoDetailView.as_view(),name='details'),
+    path('details/<pk>',views.video_details_comment,name='details'),
 ]
