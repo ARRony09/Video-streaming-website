@@ -7,6 +7,9 @@ class Post(models.Model):
     video=EmbedVideoField()
     desc=models.TextField(default="")
     created=models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering=('-created',)
     def __str__(self):
         return self.title
 

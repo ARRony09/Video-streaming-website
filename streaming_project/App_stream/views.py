@@ -2,9 +2,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import ListView,DetailView
-from requests import request
 from .models import Post, UserComment
-from .forms import UserCommentForm
+from .forms import UserCommentForm,AddVideoForm
 # Create your views here.
 
 """def home(request):
@@ -42,3 +41,13 @@ def video_details_comment(request,pk):
             comment.save()
             return HttpResponseRedirect(reverse("App_stream:details",kwargs={'pk':pk}))
     return render(request,'App_stream/details.html',context={'post':post,'form':form})
+
+
+def addvideo(request):
+    form=AddVideoForm()
+    if request.method=='POST':
+        form=AddVideoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('App_stream:home'))
+    return render(request,'App_stream/addVideo.html',context={'form':form})

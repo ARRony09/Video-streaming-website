@@ -35,7 +35,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponse("Logout successful")
+    return HttpResponseRedirect(reverse('App_stream:home'))
 
 
 def search(request):

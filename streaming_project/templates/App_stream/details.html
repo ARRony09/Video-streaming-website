@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% load embed_video_tags %}
 
 
@@ -13,11 +13,13 @@
             <br>
             
         </div>
-        <div class="col-sm-3">
+        <!--<div class="col-sm-3">
             <h6>This is for comment</h6>
             {% for comment in post.video_comment.all %}
+            
             <ul>
-                <li>{{comment.comment}}</li>
+                <li>{{comment.user}}</li><p>&nbsp;{{comment.comment}}</p>
+                <small>({{comment.comment_date}})</small>
             </ul>
             
             {% endfor %}
@@ -28,6 +30,8 @@
             </form>
             
         </div>
+        -->
+        
         
     </div>
     <h4><strong>Title: </strong>{{post.title}}</h4>
@@ -36,5 +40,25 @@
     {% endvideo %}
 <br>
 <br>
+
+
+<h6><strong> This is for comment</strong></h6>
+<hr>
+            {% for comment in post.video_comment.all %}
+            
+            <ul>
+                <li>{{comment.user}}</li><p>&nbsp;{{comment.comment}}</p>
+                <small>({{comment.comment_date}})</small>
+            </ul>
+            
+            {% endfor %}
+            
+            <form method="POST">{% csrf_token %}
+                {{form|crispy}}
+                <br>
+                <button type="submit" class='btn btn-primary'>Comment</button>
+            </form>
 </div>
+
+<br><br>
 {% endblock %}
